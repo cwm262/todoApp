@@ -1,7 +1,7 @@
 <div class="container">
-  
+
   <!-- Todos input -->
-  <form role="form" ng-submit="addTodo()">
+  <form role="form" ng-submit="addTodo(); itemsLeft()">
     <div class="row">
       <div class="input-group">
         <input type="text" ng-model="todo" placeholder="Would you like to add a ToDo item?" class="form-control">
@@ -12,14 +12,9 @@
     </div>
   </form>
 
-  <!-- Todos list -->
-  <div ui-sortable ng-model="todos">
-    <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
-      <input type="text" ng-model="todo" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
-      </span>
-      <p>There are {{todos.length}} items left To Do</p>
-    </p>
-  </div>
-</div>
+  <p class="input-group form-control" ng-repeat="todo in todos">
+    <checkbox larger ng-model="todo.isDone"></checkbox>
+    {{todo.taskName}}
+    <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
+  </p>
+  <p class="input-group">You have {{remainingCount}} items left to do.</p>
